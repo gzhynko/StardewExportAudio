@@ -1,6 +1,4 @@
-using System.Text;
 using Microsoft.Xna.Framework.Audio;
-using Newtonsoft.Json;
 using StardewModdingAPI;
 using StardewValley;
 
@@ -9,6 +7,8 @@ namespace StardewExportAudio;
 /// <summary>The main entry point for the mod.</summary>
 public class ModEntry : Mod
 {
+    private const string OutputFilename = "audio-tracks.json";
+    
     /*********
     ** Public methods
     *********/
@@ -25,8 +25,8 @@ public class ModEntry : Mod
                     outputDict[track.GetSoundbankId()] = new [] {categoryGroup.Key, track.Name};
             }
 
-            helper.Data.WriteJsonFile("audio-tracks.json", outputDict);
-            Monitor.Log($"Wrote {outputDict.Count} entries to audio-tracks.json.", LogLevel.Info);
+            helper.Data.WriteJsonFile(OutputFilename, outputDict);
+            Monitor.Log($"Wrote {outputDict.Count} entries to {OutputFilename}.", LogLevel.Info);
         };
     }
 
